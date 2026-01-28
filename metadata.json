@@ -1,0 +1,7 @@
+{
+  "name": "BazaarBD - Advanced E-commerce Ecosystem",
+  "description": "A comprehensive multi-vendor e-commerce platform designed for the Bangladesh market, featuring role-based dashboards for Customers, Sellers, and Admins, integrated with AI-driven product insights and localized logistics support.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
