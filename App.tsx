@@ -10,6 +10,8 @@ import AdminDashboard from './views/AdminDashboard';
 import CartView from './views/CartView';
 import ArchitectureView from './views/ArchitectureView';
 import CustomerAccountView from './views/CustomerAccountView';
+import ShopSetupView from './views/ShopSetupView';
+import NewListingView from './views/NewListingView';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -65,13 +67,17 @@ const App: React.FC = () => {
           />
         ) : <HomeView onProductClick={navigateToProduct} />;
       case 'seller':
-        return <SellerDashboard />;
+        return <SellerDashboard onNavigate={setCurrentView} />;
       case 'admin':
         return <AdminDashboard />;
       case 'cart':
         return <CartView cart={cart} onRemove={removeFromCart} onUpdate={updateCartQuantity} onCheckout={() => setCurrentView('checkout')} />;
       case 'account':
         return <CustomerAccountView wishlist={wishlist} onAddToCart={addToCart} onRemoveFromWishlist={toggleWishlist} />;
+      case 'shop-setup':
+        return <ShopSetupView onBack={() => setCurrentView('seller')} />;
+      case 'new-listing':
+        return <NewListingView onBack={() => setCurrentView('seller')} />;
       case 'architecture':
         return <ArchitectureView />;
       default:

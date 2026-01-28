@@ -6,7 +6,11 @@ import {
   ArrowUpRight, ArrowDownRight, Printer, CheckCircle
 } from 'lucide-react';
 
-const SellerDashboard: React.FC = () => {
+interface SellerDashboardProps {
+  onNavigate: (view: string) => void;
+}
+
+const SellerDashboard: React.FC<SellerDashboardProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState('orders');
 
   return (
@@ -19,16 +23,22 @@ const SellerDashboard: React.FC = () => {
           <p className="text-slate-500 text-sm font-medium">Store: Fashion Hub BD • Status: <span className="text-emerald-600">Active</span></p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 bg-slate-100 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-200 transition-colors">
+          <button 
+            onClick={() => onNavigate('shop-setup')}
+            className="flex items-center gap-2 bg-slate-100 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-200 transition-colors"
+          >
             <Settings className="w-4 h-4" /> Shop Setup
           </button>
-          <button className="flex items-center gap-2 bg-orange-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-orange-700 shadow-xl shadow-orange-600/20 transition-all active:scale-95">
+          <button 
+            onClick={() => onNavigate('new-listing')}
+            className="flex items-center gap-2 bg-orange-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-orange-700 shadow-xl shadow-orange-600/20 transition-all active:scale-95"
+          >
             <Plus className="w-4 h-4" /> New Listing
           </button>
         </div>
       </div>
 
-      {/* 2. Real-time Metrics (Functional Mock) */}
+      {/* 2. Real-time Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {[
           { label: 'Total Earnings', value: '৳125,430', change: '+12%', isUp: true, icon: <DollarSign className="text-emerald-600" />, bg: 'bg-emerald-50' },
@@ -50,7 +60,7 @@ const SellerDashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* 3. Order Management (Action Mapped) */}
+        {/* 3. Order Management */}
         <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
           <div className="p-6 border-b border-slate-100 flex justify-between items-center">
             <div className="flex gap-4">
@@ -88,7 +98,7 @@ const SellerDashboard: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 text-sm font-black text-slate-900">{order.amount}</td>
                     <td className="px-6 py-4">
-                      <span className={`text-[9px] font-black px-2 py-1 rounded-full uppercase tracking-tighter ${
+                      <span className={`text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-tighter ${
                         order.status === 'Pending' ? 'bg-amber-100 text-amber-700' :
                         order.status === 'Processing' ? 'bg-blue-100 text-blue-700' :
                         'bg-emerald-100 text-emerald-700'
